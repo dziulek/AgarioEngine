@@ -3,7 +3,7 @@
 
 #include "shape.hpp"
 #include "../constants.hpp"
-#include "../glm/glm.hpp"
+#include "../../lib/glm/glm/glm.hpp"
 
 namespace agario{
 

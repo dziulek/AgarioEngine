@@ -7,7 +7,7 @@
 #include "maps/mapCrashController.hpp"
 #include "maps/mapBombController.hpp"
 #include "player.hpp"
-#include "glm/glm.hpp"
+#include "../lib/glm/glm/glm.hpp"
 #include <vector>
 #include <memory>
 

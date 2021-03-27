@@ -1,13 +1,12 @@
-add_subdirectory(glm)
+project(AgarioEngineDemo)
 
-file(GLOB_RECURSE SOURCE_SHAPES /shapes/*.cpp)
+cmake_minimum_required(VERSION 3.10)
 
-file(GLOB_RECURSE SOURCE_MAPS /maps/*.cpp)
+set(CMAKE_CXX_STANDARD 14)
 
-file(GLOB_RECURSE SOURCE_CORE *.cpp)
+include_directories(src)
 
-set(SOURCE_FILES ${SOURCE_SHAPES} ${SOURCE_SHAPES} ${SOURCE_CORE})
-
-add_library(AgarioEngine_lib STATIC ${SOURCE_FILES})
-
-target_link_libraries(AgarioEngine_lib glm)
+add_subdirectory(src)
+# add_subdirectory(tests)
+add_subdirectory(lib/glm)
+add_subdirectory(lib/googletest)

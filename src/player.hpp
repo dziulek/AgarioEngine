@@ -2,7 +2,7 @@
 #define PLAYER_HPP
 
 #include "playerObject.hpp"
-#include "glm/glm.hpp"
+#include "../lib/glm/glm/glm.hpp"
 #include <vector>
 #include <string>
 

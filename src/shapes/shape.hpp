@@ -1,7 +1,7 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
 
-#include "../glm/glm.hpp"
+#include "../../lib/glm/glm/glm.hpp"
 #include "../constants.hpp"
 #include <utility>
 
