@@ -18,24 +18,33 @@ void MapPlayerMovement::check_borders(){
         //for each blob
         for(int i = 0; i < playerobject->getSize(); i++){
 
-            float xVelocity = (*playerobject)[i].getVelocity().x;
-            float yVelocity = (*playerobject)[i].getVelocity().y;
+            glm::vec2 vel = glm::vec2(0.f, 0.f);
             float xPosition = (*playerobject)[i].getPosition().x;
             float yPosition = (*playerobject)[i].getPosition().y;
             float radius = (*playerobject)[i].getRadius();
 
             //left border
-            if((*playerobject)[i].getPosition().x - (*playerobject)[i].getRadius() < 0)
-                (*playerobject)[i].setVelocity({abs(xVelocity), (*playerobject)[i].getVelocity().y});
+            float out = (*playerobject)[i].getPosition().x - (*playerobject)[i].getRadius();
+            if(out < 0){
+                vel += glm::vec2(borderForce(abs(out)), 0.f);
+            }
             //right border
-            if((*playerobject)[i].getPosition().x + (*playerobject)[i].getRadius() > map->width)
-                (*playerobject)[i].setVelocity({-abs(xVelocity), (*playerobject)[i].getVelocity().y});
+            out = (*playerobject)[i].getPosition().x + (*playerobject)[i].getRadius() - map->width;
+            if(out > 0.f){
+                vel += glm::vec2(-borderForce(abs(out)), 0.f);
+            }
+            out = (*playerobject)[i].getPosition().y - (*playerobject)[i].getRadius();
             //up border
-            if((*playerobject)[i].getPosition().y - (*playerobject)[i].getRadius() < 0)
-                (*playerobject)[i].setVelocity({(*playerobject)[i].getVelocity().x, abs(yVelocity)});
+            if(out < 0){
+                vel += glm::vec2(0.f, borderForce(abs(out)));
+            }
             //down border
-            if((*playerobject)[i].getPosition().y + (*playerobject)[i].getRadius() > map->height)
-                (*playerobject)[i].setVelocity({(*playerobject)[i].getVelocity().x, -abs(yVelocity)});
+            out = (*playerobject)[i].getPosition().y + (*playerobject)[i].getRadius() - map->height;
+            if(out > map->height){
+                vel += glm::vec2(0.f, -borderForce(abs(out)));
+            }
+
+            (*playerobject)[i].setVelocity((*playerobject)[i].getVelocity() + vel);
         }
 
     }
@@ -61,6 +70,11 @@ void MapPlayerMovement::check_borders(){
             w.get()->setVelocity({xVel, -abs(yVel)});
         }
     }
+}
+
+float MapPlayerMovement::borderForce(const float margin){
+
+    return pow(2, margin/2);
 }
 
 

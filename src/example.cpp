@@ -51,7 +51,7 @@ int main(){
 
         rend.getWindow()->clear();
 
-        game.mainLoop(1.0f / 30);
+        game.mainLoop(1.0f / 60);
 
         rend.drawMap();
 
@@ -67,10 +67,6 @@ int main(){
 
         rend.getWindow()->setFramerateLimit(60);
     }
-
-    // Server server;
-
-    // server.mainLogic();   
 
     return 0;
 }

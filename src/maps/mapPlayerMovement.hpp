@@ -14,6 +14,7 @@ class MapPlayerMovement : public MapController{
 private:
 
     void check_borders();
+    float borderForce(const float margin);
 
 public:
 
