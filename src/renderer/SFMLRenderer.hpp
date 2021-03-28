@@ -17,6 +17,7 @@ private:
     sf::View * view;
 
     Game * game;
+    sf::Font font;
     
 public:
 
@@ -29,6 +30,7 @@ public:
         view->setCenter(sf::Vector2f(game->getMap()->width/2.0f, game->getMap()->height/2.0f));
         view->setViewport(sf::FloatRect(0.0f, 0.0f, 1.0f, 1.0f));
         
+        loadFont("/home/piotr/AgarioEngine/src/renderer/data-latin.ttf");
     }
 
     ~SFMLRenderer(){
@@ -45,6 +47,7 @@ public:
     // void keyCallback(sf::Event event);
     // void addCallback(CallbackObserver * callback);
     Game * getGame(){ return this->game;}
+    bool loadFont(std::string fileName);
 
     friend class callbackObserver;
 

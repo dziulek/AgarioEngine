@@ -7,6 +7,14 @@ namespace agario{
 
 using namespace agario::shapes;
 
+bool SFMLRenderer::loadFont(std::string fileName){
+
+    if(!this->font.loadFromFile(fileName)){
+        return false;
+    }
+    return true;
+}
+
 void SFMLRenderer::drawMap(){
 
     this->window->setView(*view);
@@ -43,6 +51,7 @@ void SFMLRenderer::drawMap(){
     for(auto & b : this->game->getMap()->bombs){
 
         sf::CircleShape octagon(BOMB_RADIUS, 8);
+        octagon.setOrigin(sf::Vector2f(BOMB_RADIUS, BOMB_RADIUS));
         octagon.setPosition(sf::Vector2f(b.get()->getXCoord(), b.get()->getYCoord()));
         octagon.setFillColor(sf::Color::Green);
         window->draw(octagon);
@@ -81,11 +90,16 @@ void SFMLRenderer::drawMap(){
                 sf::Vertex(pos + sf::Vector2f(game->getPlayer(i)[j].getVelocity().x, game->getPlayer(i)[j].getVelocity().y))
             };
 
-            window->draw(line, 2, sf::Lines);
+            // window->draw(line, 2, sf::Lines);
 
-            // sf::VertexArray line(sf::Lines, 2);
-            // line[0] = blob.getPosition();
-            // line[1] = 
+            //draw size of blobs
+            sf::Text text;
+            text.setString(std::to_string((int)game->getPlayer(i)[j].getArea()));
+            text.setCharacterSize(30);
+            text.setFillColor(sf::Color::White);
+            text.setPosition(game->getPlayer(i)[j].getPosition().x, game->getPlayer(i)[j].getPosition().y);
+
+            window->draw(text);
        }
    }
 }

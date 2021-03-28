@@ -47,7 +47,7 @@ const float FRICTION_COEFF = 0.2;
 
 const int MAX_MINIS_ON_MAP = 300;
 const int MAX_MISSING_MINIS = 50;
-const int MAX_BOMB_ON_MAP = 4;
+const int MAX_BOMB_ON_MAP = 10;
 const float MINI_WIDTH = 50.0f;
 
 const int DEFAULT_MAP_WIDTH = 300;

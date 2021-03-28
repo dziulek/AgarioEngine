@@ -40,7 +40,7 @@ void MapPlayerMovement::check_borders(){
             }
             //down border
             out = (*playerobject)[i].getPosition().y + (*playerobject)[i].getRadius() - map->height;
-            if(out > map->height){
+            if(out > 0){
                 vel += glm::vec2(0.f, -borderForce(abs(out)));
             }
 

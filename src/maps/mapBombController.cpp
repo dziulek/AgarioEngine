@@ -27,7 +27,6 @@ void MapBombController::update(){
                         p->bombAction(blob);
                         explode = true;
                         break;
-                        std::cerr<< "ok";
                     }
                 }        
             }

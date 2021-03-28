@@ -19,7 +19,7 @@ void PlayerObject::divideObject(){
         }
 
         for(auto & temp : tempVec){
-            glm::vec2 dir = -300.f * (float)log(temp->getRadius() / 3000.0f)
+            glm::vec2 dir = -1300.f * (float)log(temp->getRadius() / 300.0f)
              * glm::normalize(this->mousePosition - temp.get()->getPosition());
             temp->setAcceleration(dir);
             this->blobs.push_back(std::move(temp));
@@ -110,12 +110,11 @@ void PlayerObject::setVelocities(){
                 float dist = glm::distance(temp_b1->getPosition(), temp_b2->getPosition());
                 float min_dist = temp_b2->getRadius() + temp_b1->getRadius();
 
-                if(dist < temp_b2->getRadius() + temp_b1->getRadius() + eps){
+                if(dist < temp_b2->getRadius() + temp_b1->getRadius() +0){
 
-                    
-
-                    temp_b1->setVelocity(temp_b1->getVelocity() - ax * 1.f * min_dist * float(-log(dist / (1.2 * min_dist))));
-                    temp_b2->setVelocity(temp_b2->getVelocity() + ax * 1.f * min_dist * float(-log(dist / (1.2 *min_dist))));
+                    auto new_velocities = MoveableCircle::calculateGravityVelocities(*temp_b1, *temp_b2);
+                    temp_b1->setVelocity(new_velocities.first);
+                    temp_b2->setVelocity(new_velocities.second);
                 }
 
                 if(abs(glm::distance(temp_b1->getPosition(), temp_b2->getPosition()) - temp_b2->getRadius() - temp_b1->getRadius()) < 3 * eps){
@@ -133,16 +132,16 @@ void PlayerObject::setVelocities(){
                         }
                         else {
 
-                            temp_b1->setVelocity(temp_b1->getVelocity() - ax * (dot_b1 + 0.1f));
-                            temp_b2->setVelocity(temp_b2->getVelocity() - ax * (dot_b2 + 0.1f));
+                            temp_b1->setVelocity(temp_b1->getVelocity() - ax * (dot_b1 + 0.3f));
+                            temp_b2->setVelocity(temp_b2->getVelocity() - ax * (dot_b2 - 0.3f));
                         }
                     }
                     else {
 
                         if(dot_b2 > 0){
 
-                            temp_b1->setVelocity(temp_b1->getVelocity() + ax * (dot_b1 + 0.1f));
-                            temp_b2->setVelocity(temp_b2->getVelocity() + ax * (dot_b1 + 0.1f));
+                            // temp_b1->setVelocity(temp_b1->getVelocity() + ax * (dot_b1 + 0.1f));
+                            // temp_b2->setVelocity(temp_b2->getVelocity() - ax * (dot_b1 + 0.1f));
                         }
                         else {
 
@@ -227,7 +226,7 @@ float PlayerObject::bombAction(std::unique_ptr<MoveableCircle> & mv){
 
             this->blobs.push_back(std::unique_ptr<MoveableCircle>(new MoveableCircle({x, y}, new_radius)));
             this->blobs.back()->setColor(color);
-            glm::vec2 dir = -600.f * (float)log(blobs.back()->getRadius() / 3000.0f)
+            glm::vec2 dir = -900.f * (float)log(blobs.back()->getRadius() / 3000.0f)
              * glm::normalize(blobs.back().get()->getPosition() - explosionCenter);
             blobs.back()->setAcceleration(dir);
         }

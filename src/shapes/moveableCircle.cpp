@@ -40,17 +40,18 @@ void MoveableCircle::move(const float dTime){
 std::pair<glm::vec2, glm::vec2> MoveableCircle::calculateGravityVelocities(const MoveableCircle & c1, const MoveableCircle & c2){
 
     glm::vec2 r = c2.getPosition() - c1.getPosition();
-
     float len = glm::length(r);
-    if(len < c1.getRadius() + c2.getRadius() - eps){
+    // if(len < c1.getRadius() + c2.getRadius() - eps){
 
-        return {c1.getVelocity(), c2.getVelocity()};
-    }
+    //     return {c1.getVelocity(), c2.getVelocity()};
+    // }
 
-    glm::vec2 v1 = c1.calculateVelocityMod() * r;
+    float min_dist = c1.getRadius() + c2.getRadius();
+
+    glm::vec2 v1 = c1.getVelocity() - glm::normalize(r) * (float)pow(c1.getRadius(), 2.3f) * float(-log(len/(min_dist)));
 
     r = -r;
-    glm::vec2 v2 = c2.calculateVelocityMod() * r;
+    glm::vec2 v2 = c2.getVelocity() - glm::normalize(r) * (float)pow(c2.getRadius(), 2.3f) * float(-log(len/(min_dist)));
 
     return {v1, v2};
 }
