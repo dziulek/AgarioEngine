@@ -53,6 +53,7 @@ public:
     void mainLoop(const float dTime);
 
     void cullDeadPlayers();
+
 };
 
 }

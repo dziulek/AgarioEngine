@@ -59,6 +59,8 @@ public:
     void notify();
 
     void wAction(PlayerObject * po);
+
+    friend class Bot;
     
 };
 
