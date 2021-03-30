@@ -92,7 +92,7 @@ void SFMLRenderer::drawMap(){
                 sf::Vertex(pos + sf::Vector2f(game->getPlayer(i)[j].getVelocity().x, game->getPlayer(i)[j].getVelocity().y))
             };
 
-            // window->draw(line, 2, sf::Lines);
+            window->draw(line, 2, sf::Lines);
 
             //draw size of blobs
             // sf::Text text;

@@ -116,6 +116,7 @@ void PlayerObject::setVelocities(){
                     auto new_velocities = MoveableCircle::calculateGravityVelocities(*temp_b1, *temp_b2);
                     temp_b1->setVelocity(new_velocities.first);
                     temp_b2->setVelocity(new_velocities.second);
+
                 }
 
                 // if(abs(glm::distance(temp_b1->getPosition(), temp_b2->getPosition()) - temp_b2->getRadius() - temp_b1->getRadius()) < eps){
@@ -152,7 +153,16 @@ void PlayerObject::setVelocities(){
                 //     }
                 // }
             }
-        }        
+
+        } 
+
+        for(auto & blob : blobs){
+            float d = glm::length(mousePosition - blob.get()->getPosition());
+            if(d <= blob.get()->getRadius()){
+
+                blob.get()->setVelocity(blob.get()->getVelocity() * d / blob.get()->getRadius());
+            }
+        }       
     }
 }
 

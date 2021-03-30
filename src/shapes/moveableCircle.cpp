@@ -45,17 +45,45 @@ std::pair<glm::vec2, glm::vec2> MoveableCircle::calculateGravityVelocities(const
 
     glm::vec2 r = c2.getPosition() - c1.getPosition();
     float len = glm::length(r);
-    // if(len < c1.getRadius() + c2.getRadius() - eps){
-
-    //     return {c1.getVelocity(), c2.getVelocity()};
-    // }
+    glm::vec2 r_norm = glm::normalize(r);
+    glm::vec2 v1 = c1.velocity, v2 = c2.velocity;
 
     float min_dist = c1.getRadius() + c2.getRadius();
 
-    glm::vec2 v1 = c1.getVelocity() - glm::normalize(r) * (float)pow(c1.getRadius(), 2.f) * float(-log(len/(min_dist)));
+    float dot_c1 = glm::dot(r_norm, c1.velocity);
+    float dot_c2 = glm::dot(r_norm, c2.velocity);
 
-    r = -r;
-    glm::vec2 v2 = c2.getVelocity() - glm::normalize(r) * (float)pow(c2.getRadius(), 2.f) * float(-log(len/(min_dist)));
+    float threshold_c1 = glm::length(c1.calculateVelocityMod());
+    float threshold_c2 = glm::length(c2.calculateVelocityMod());
+    float delta = 1.f;
+
+    threshold_c1 *= 1.2f;
+    threshold_c2 *= 1.2f;
+
+    // if(dot_c1 > 0.0f && dot_c2 < 0.0f){
+
+    //     v1 += (-r_norm * dot_c1);
+    //     v2 += (-r_norm * dot_c2); 
+    // }
+    // // else if(dot_c1 < 0.0f)
+
+
+
+    if(len < glm::length(min_dist) - delta){
+
+        v1 += -r_norm * threshold_c1;
+        v2 += r_norm * threshold_c2;
+
+        return {v1, v2};
+    }
+    //quadratic function coefficients
+    float a = -threshold_c1 / (2 * min_dist * delta - delta * delta);
+    float c = -a * min_dist * min_dist;
+
+    v1 += -r_norm * quadraticFunction(a, 0.0f, c, len);
+    a = -threshold_c2 / (2 * min_dist * delta - delta * delta);
+    c = -a * min_dist * min_dist;
+    v2 += r_norm * quadraticFunction(a, 0.0f, c, len);
 
     return {v1, v2};
 }

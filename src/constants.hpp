@@ -62,6 +62,13 @@ const float W_AREA = PI * MIN_PLAYER_RADIUS * MIN_PLAYER_RADIUS;
 const float MIN_PLAYER_AREA = W_AREA;
 const float W_RADIUS = MIN_PLAYER_RADIUS;
 
+//functions
+
+constexpr float quadraticFunction(const float a, const float b, const float c, const float x){
+
+    return a * x * x + b * x + c;
+}
+
 }//namespace agario
 
 #endif
