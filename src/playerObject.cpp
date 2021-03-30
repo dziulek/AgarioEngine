@@ -19,7 +19,7 @@ void PlayerObject::divideObject(){
         }
 
         for(auto & temp : tempVec){
-            glm::vec2 dir = -1300.f * (float)log(temp->getRadius() / 300.0f)
+            glm::vec2 dir = MoveableCircle::accelerationFun(0.1)
              * glm::normalize(this->mousePosition - temp.get()->getPosition());
             temp->setAcceleration(dir);
             this->blobs.push_back(std::move(temp));
@@ -110,46 +110,47 @@ void PlayerObject::setVelocities(){
                 float dist = glm::distance(temp_b1->getPosition(), temp_b2->getPosition());
                 float min_dist = temp_b2->getRadius() + temp_b1->getRadius();
 
-                if(dist < temp_b2->getRadius() + temp_b1->getRadius() +0){
+                if(dist < temp_b2->getRadius() + temp_b1->getRadius() && glm::length(temp_b1->getAcceleration()) < 0.1f &&
+                        glm::length(temp_b2->getAcceleration()) < 0.1f){
 
                     auto new_velocities = MoveableCircle::calculateGravityVelocities(*temp_b1, *temp_b2);
                     temp_b1->setVelocity(new_velocities.first);
                     temp_b2->setVelocity(new_velocities.second);
                 }
 
-                if(abs(glm::distance(temp_b1->getPosition(), temp_b2->getPosition()) - temp_b2->getRadius() - temp_b1->getRadius()) < 3 * eps){
+                // if(abs(glm::distance(temp_b1->getPosition(), temp_b2->getPosition()) - temp_b2->getRadius() - temp_b1->getRadius()) < eps){
 
-                    //ax is a vector of length 1 from b1 to b2
-                    float dot_b1 = glm::dot(ax, temp_b1->getVelocity());
-                    float dot_b2 = glm::dot(ax, temp_b2->getVelocity());
+                //     //ax is a vector of length 1 from b1 to b2
+                //     float dot_b1 = glm::dot(ax, temp_b1->getVelocity());
+                //     float dot_b2 = glm::dot(ax, temp_b2->getVelocity());
 
-                    if(dot_b1 > 0.f){
+                //     if(dot_b1 > 0.f){
 
-                        if(dot_b2 > 0.f){
+                //         if(dot_b2 > 0.f){
 
-                            temp_b1->setVelocity(temp_b1->getVelocity() - ax * dot_b1 + ax * std::min(dot_b1, dot_b2));
-                            // temp_b1->setVelocity(temp_b1->getVelocity() - ax * dot_b1);
-                        }
-                        else {
+                //             temp_b1->setVelocity(temp_b1->getVelocity() - ax * dot_b1 + ax * std::min(dot_b1, dot_b2));
+                //             // temp_b1->setVelocity(temp_b1->getVelocity() - ax * dot_b1);
+                //         }
+                //         else {
 
-                            temp_b1->setVelocity(temp_b1->getVelocity() - ax * (dot_b1 + 0.3f));
-                            temp_b2->setVelocity(temp_b2->getVelocity() - ax * (dot_b2 - 0.3f));
-                        }
-                    }
-                    else {
+                //             temp_b1->setVelocity(temp_b1->getVelocity() - ax * (dot_b1 + 0.3f));
+                //             temp_b2->setVelocity(temp_b2->getVelocity() - ax * (dot_b2 - 0.3f));
+                //         }
+                //     }
+                //     else {
 
-                        if(dot_b2 > 0){
+                //         if(dot_b2 > 0){
 
-                            // temp_b1->setVelocity(temp_b1->getVelocity() + ax * (dot_b1 + 0.1f));
-                            // temp_b2->setVelocity(temp_b2->getVelocity() - ax * (dot_b1 + 0.1f));
-                        }
-                        else {
+                //             // temp_b1->setVelocity(temp_b1->getVelocity() + ax * (dot_b1 + 0.1f));
+                //             // temp_b2->setVelocity(temp_b2->getVelocity() - ax * (dot_b1 + 0.1f));
+                //         }
+                //         else {
 
-                            temp_b2->setVelocity(temp_b2->getVelocity() + ax * dot_b2 - ax * std::min(dot_b2, dot_b1));
-                            // temp_b2->setVelocity(temp_b2->getVelocity() + ax * dot_b2);
-                        }
-                    }
-                }
+                //             temp_b2->setVelocity(temp_b2->getVelocity() + ax * dot_b2 - ax * std::min(dot_b2, dot_b1));
+                //             // temp_b2->setVelocity(temp_b2->getVelocity() + ax * dot_b2);
+                //         }
+                //     }
+                // }
             }
         }        
     }

@@ -18,6 +18,7 @@ protected:
     glm::vec2 acceleration = {0, 0};
     glm::vec2 velocity = {0,0};
     void calculateVelocity();
+
     // glm::vec2 calcResultantForce();
     
 
@@ -39,6 +40,10 @@ public:
     virtual void move(const float dTime);
     static std::pair<glm::vec2, glm::vec2> calculateGravityVelocities(const MoveableCircle & c1, const MoveableCircle & c2);
     void setAcceleration(glm::vec2 acc){this->acceleration = acc;}
+    glm::vec2 getAcceleration(){ return this->acceleration;}    
+    
+    static float accelerationFun(const float x);
+    static float invAccelerationFun(const float y);
 };
 
 }//namespace shapes

@@ -30,7 +30,7 @@ public:
         view->setCenter(sf::Vector2f(game->getMap()->width/2.0f, game->getMap()->height/2.0f));
         view->setViewport(sf::FloatRect(0.0f, 0.0f, 1.0f, 1.0f));
         
-        loadFont("/home/piotr/AgarioEngine/src/renderer/data-latin.ttf");
+        loadFont("/home/czewian/AgarioEngine/src/renderer/arial.ttf");
     }
 
     ~SFMLRenderer(){

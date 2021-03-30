@@ -21,9 +21,13 @@ void MoveableCircle::move(const float dTime){
 
     float dirx, diry;
 
-    if(glm::length(this->acceleration) > eps){
+    if(glm::length(acceleration) > eps && invAccelerationFun(glm::length(acceleration)) < 1.f){
 
-        this->acceleration -= this->acceleration / (3.f * (float)log(this->area));
+        // this->acceleration -= this->acceleration / (3.f * (float)sqrt(this->area));
+        this->acceleration = glm::normalize(this->acceleration) * accelerationFun(
+            invAccelerationFun(glm::length(acceleration)) + dTime
+        );
+        // std::cerr<<glm::length(acceleration) <<" ";
         this->velocity += this->acceleration * dTime;        
     }
     else this->acceleration = {0.0f, 0.0f};
@@ -48,10 +52,10 @@ std::pair<glm::vec2, glm::vec2> MoveableCircle::calculateGravityVelocities(const
 
     float min_dist = c1.getRadius() + c2.getRadius();
 
-    glm::vec2 v1 = c1.getVelocity() - glm::normalize(r) * (float)pow(c1.getRadius(), 2.3f) * float(-log(len/(min_dist)));
+    glm::vec2 v1 = c1.getVelocity() - glm::normalize(r) * (float)pow(c1.getRadius(), 2.f) * float(-log(len/(min_dist)));
 
     r = -r;
-    glm::vec2 v2 = c2.getVelocity() - glm::normalize(r) * (float)pow(c2.getRadius(), 2.3f) * float(-log(len/(min_dist)));
+    glm::vec2 v2 = c2.getVelocity() - glm::normalize(r) * (float)pow(c2.getRadius(), 2.f) * float(-log(len/(min_dist)));
 
     return {v1, v2};
 }
@@ -61,6 +65,22 @@ void MoveableCircle::addMass(const float mass){
     this->area += mass;
     float r = Circle::getRadiusFromArea(this->area);
     this->radius = r;
+}
+
+float MoveableCircle::accelerationFun(const float x){
+
+    // return -30.f *log(x);
+    // return 1.f / (x - 1.2) + 35.f;
+    // return 1.f / (2.f - x * 1001.f / 1000.f) + 1010.5f;
+    return -3000.f * (x * x - 1.f);
+
+}
+
+float MoveableCircle::invAccelerationFun(const float y){
+
+    // return 1.f / (y - 35.f) + 1.2;
+    // return (2.f - 1.f / (y - 1010.5f)) * 1000.f / 1001.f;
+    return sqrt(-y/3000.f + 1.f);
 }
 
 }
