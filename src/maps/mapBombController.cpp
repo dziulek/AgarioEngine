@@ -19,14 +19,25 @@ void MapBombController::update(){
                 float dist = glm::length(blob.get()->getPosition() - bomb.get()->getPosition());
                 if(dist < blob.get()->getRadius()){
                     
-                    if(blob.get()->getArea() * 0.85 > bomb.get()->getArea() && p->getSize() < MAX_PLAYER_SIZE){
+                    if(blob.get()->getArea() * 0.85 > bomb.get()->getArea()){
                         
+                        float bomb_mass = bomb.get()->getArea();
                         bomb.reset();
                         bomb = std::move(this->getMap()->bombs.back());
                         this->getMap()->bombs.pop_back();
-                        p->bombAction(blob);
+                        // std::cerr << p->getSize() << std::endl;
+
+
+                        if(p->getSize() >= MAX_PLAYER_SIZE){
+                            //eat bomb
+                            blob.get()->addMass(bomb_mass);
+                        }
+                        else {
+                            p->bombAction(blob);
+                        }
+
                         explode = true;
-                        break;
+                        break;                        
                     }
                 }        
             }

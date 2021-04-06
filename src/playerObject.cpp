@@ -160,6 +160,7 @@ void PlayerObject::setVelocities(){
             float d = glm::length(mousePosition - blob.get()->getPosition());
             if(d <= blob.get()->getRadius()){
 
+                // blob.get()->setVelocity({0.f, 0.f});
                 blob.get()->setVelocity(blob.get()->getVelocity() * d / blob.get()->getRadius());
             }
         }       
