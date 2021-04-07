@@ -238,7 +238,7 @@ float PlayerObject::bombAction(std::unique_ptr<MoveableCircle> & mv){
 
             this->blobs.push_back(std::unique_ptr<MoveableCircle>(new MoveableCircle({x, y}, new_radius)));
             this->blobs.back()->setColor(color);
-            glm::vec2 dir = -900.f * (float)log(blobs.back()->getRadius() / 3000.0f)
+            glm::vec2 dir = MoveableCircle::accelerationFun(0.1f)
              * glm::normalize(blobs.back().get()->getPosition() - explosionCenter);
             blobs.back()->setAcceleration(dir);
         }
