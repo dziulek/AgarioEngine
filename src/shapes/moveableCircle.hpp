@@ -15,8 +15,8 @@ class MoveableCircle : public Circle{
 
 protected:
 
-    glm::vec2 acceleration = {0, 0};
-    glm::vec2 velocity = {0,0};
+    glm::vec2 acceleration = glm::vec2(0.f, 0.f);
+    glm::vec2 velocity = glm::vec2(0.f, 0.f);
     void calculateVelocity();
 
     // glm::vec2 calcResultantForce();

@@ -34,7 +34,7 @@ public:
     static float getRadiusFromArea(const float area);
     void setRadius(const float newR);
     const float getRadius() const;
-    uint32_t getColor() const { return this->color;}
+    u_int32_t getColor() const { return this->color;}
     
     float static inline getDistance(const Circle & a, const Circle & b);
 

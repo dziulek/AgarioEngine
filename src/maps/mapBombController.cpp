@@ -54,7 +54,7 @@ void MapBombController::initMap(){
         float x = static_cast<float>(rand()) / RAND_MAX * this->getMap()->width;
         float y = static_cast<float>(rand()) / RAND_MAX * this->getMap()->height;
 
-        this->getMap()->bombs.push_back(std::unique_ptr<Bomb>(new Bomb({x, y})));
+        this->getMap()->bombs.push_back(std::unique_ptr<Bomb>(new Bomb(glm::vec2(x, y))));
     }
 }
 

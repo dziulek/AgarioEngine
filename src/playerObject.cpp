@@ -90,7 +90,7 @@ void PlayerObject::setVelocities(){
 
         // std::cout << before.x << " " << before.y << std::endl;
         if(abs(v.x) < 1.0 && abs(v.y) < 1.0)
-            v = {0, 0};
+            v = glm::vec2(0.f, 0.f);
         else v = glm::normalize(v);
 
         v *= b.get()->calculateVelocityMod();
@@ -236,7 +236,7 @@ float PlayerObject::bombAction(std::unique_ptr<MoveableCircle> & mv){
             x = explosionCenter.x + cos(float(i) * deg) * r;
             y = explosionCenter.y + sin(float(i) * deg) * r;
 
-            this->blobs.push_back(std::unique_ptr<MoveableCircle>(new MoveableCircle({x, y}, new_radius)));
+            this->blobs.push_back(std::unique_ptr<MoveableCircle>(new MoveableCircle(glm::vec2(x, y), new_radius)));
             this->blobs.back()->setColor(color);
             glm::vec2 dir = MoveableCircle::accelerationFun(0.1f)
              * glm::normalize(blobs.back().get()->getPosition() - explosionCenter);
