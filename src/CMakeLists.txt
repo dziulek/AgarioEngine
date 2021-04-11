@@ -1,4 +1,4 @@
-set(BINARY ${CMAKE_PROJECT_NAME})
+set(BINARY AgarioEngine)
 
 # file(GLOB_RECURSE SOURCE_SHAPES /shapes/*.cpp)
 # file(GLOB_RECURSE SOURCE_MAPS /maps/*.cpp)

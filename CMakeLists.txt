@@ -1,4 +1,4 @@
-project(AgarioEngineDemo)
+project(AgarioEngine)
 
 cmake_minimum_required(VERSION 3.10)
 
@@ -12,7 +12,7 @@ add_subdirectory(src)
 
 add_executable(${BINARY}_run example.cpp)
 
-target_link_libraries(${BINARY}_run PUBLIC ${CMAKE_PROJECT_NAME}_lib -lsfml-graphics -lsfml-window -lsfml-system)
+target_link_libraries(${BINARY}_run PUBLIC AgarioEngine_lib -lsfml-graphics -lsfml-window -lsfml-system)
 # add_subdirectory(tests)
 # add_subdirectory(lib/glm)
 add_subdirectory(lib/googletest)
