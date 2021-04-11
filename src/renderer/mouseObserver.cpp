@@ -12,7 +12,7 @@ void MouseObserver::update(Player * player){
 
     sf::Vector2f viewPos = renderer->getWindow()->mapPixelToCoords(mousePos);
 
-    this->getRenderer()->getGame()->setPlayerMousePosition(player, {viewPos.x, viewPos.y});
+    this->getRenderer()->getGame()->setPlayerMousePosition(player, glm::vec2(viewPos.x, viewPos.y));
 };
 
 }

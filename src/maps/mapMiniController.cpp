@@ -23,7 +23,7 @@ void MapMiniController::update(){
             //[optional] check for collision with another mini
             //not necessary
             //add to the map
-            this->getMap()->minis[int(y / MINI_WIDTH)][int(x / MINI_WIDTH)].push_back(std::unique_ptr<Mini>(new Mini({x, y})));
+            this->getMap()->minis[int(y / MINI_WIDTH)][int(x / MINI_WIDTH)].push_back(std::unique_ptr<Mini>(new Mini(glm::vec2(x, y))));
             
         }
         this->map->nOfMinis+=missing;
@@ -46,7 +46,7 @@ void MapMiniController::initMap(){
         //check for collision with another mini
         //not necessary
         //add to the map
-        this->getMap()->minis[int(y / MINI_WIDTH)][int(x / MINI_WIDTH)].push_back(std::unique_ptr<Mini>(new Mini({x, y})));
+        this->getMap()->minis[int(y / MINI_WIDTH)][int(x / MINI_WIDTH)].push_back(std::unique_ptr<Mini>(new Mini(glm::vec2(x, y))));
     }
     map->nOfMinis = MAX_MINIS_ON_MAP;
 }

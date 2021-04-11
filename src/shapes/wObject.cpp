@@ -11,7 +11,7 @@ bool WObject::checkIfStop(){
 
 void WObject::stopObject(){
 
-    this->velocity = {0.0, 0.0};
+    this->velocity = glm::vec2(0.0, 0.0);
     this->isMove = false;
 }
 

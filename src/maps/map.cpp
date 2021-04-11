@@ -46,7 +46,7 @@ glm::vec2 Map::findPositionForNewPlayer(){
         occupied = false;
     }
 
-    return {xPos, yPos};
+    return glm::vec2(xPos, yPos);
     // return {100, 100};
 }
 

@@ -58,16 +58,16 @@ void MapPlayerMovement::check_borders(){
         yVel = w.get()->getVelocity().y;
 
         if(w.get()->getPosition().x - W_RADIUS < 0){
-            w.get()->setVelocity({abs(xVel), yVel});
+            w.get()->setVelocity(glm::vec2(abs(xVel), yVel));
         }
         else if(w.get()->getPosition().x + W_RADIUS > map->width){
-            w.get()->setVelocity({-abs(xVel), yVel});
+            w.get()->setVelocity(glm::vec2(-abs(xVel), yVel));
         }
         if(w.get()->getPosition().y - W_RADIUS < 0){
-            w.get()->setVelocity({xVel, abs(yVel)});
+            w.get()->setVelocity(glm::vec2(xVel, abs(yVel)));
         }
         else if(w.get()->getPosition().y + W_RADIUS > map->height){
-            w.get()->setVelocity({xVel, -abs(yVel)});
+            w.get()->setVelocity(glm::vec2(xVel, -abs(yVel)));
         }
     }
 }
