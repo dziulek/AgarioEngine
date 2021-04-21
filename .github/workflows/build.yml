@@ -1,0 +1,25 @@
+name: Build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    
+    runs-on: ubuntu-latest
+      
+    steps:
+    - uses: actions/checkout@v2
+      with: 
+        submodules: 'recursive'
+    - name: install sfml
+      run: sudo apt install libsfml-dev
+    - name: CMake Configure
+      run: mkdir build && cd build && cmake ..
+    - name: CMake Build
+      run: |
+        cd build
+        make

@@ -1,16 +1,13 @@
-# AgarioEngine
-This is my standalone, simple implementation of game engine for Agario with simple graphical interface.
+# Agar.io engine
+![CI status](https://github.com/dziulek/AgarioEngine/actions/workflows/build.yml/badge.svg)
 
+This is my standalone, simple implementation of game engine for [Agar.io](https://agar.io/) with simple graphical interface.
+I use this engine as submodule in my implementation of C++ game server (I will make it public in the near future).
 ![](agarioDemo.gif)
 
-# Technologies
-Project created with:
-* C++ 14
-* [SFML](https://www.sfml-dev.org/download.php)
-* [glm](https://github.com/g-truc/glm)
-
 # Setup
-To run this project:
+You have to clone repository with all submodules (with `--recurse-submodules` option) and install [SFML](https://www.sfml-dev.org/download.php).
+To build and run:
 ```
 $ mkdir build
 $ cd build/
