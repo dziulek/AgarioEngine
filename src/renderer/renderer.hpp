@@ -2,7 +2,7 @@
 #define RENDERER_HPP
 
 #include "../agario_engine.hpp"
-#include "gameObject.hpp"
+#include "../gameObject.hpp"
 
 namespace agario{
 
