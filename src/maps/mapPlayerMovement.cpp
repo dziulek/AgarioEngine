@@ -56,19 +56,28 @@ void MapPlayerMovement::check_borders(){
 
         xVel = w.get()->getVelocity().x;
         yVel = w.get()->getVelocity().y;
+        float out;
+        glm::vec2 vel = glm::vec2(0.f, 0.f);
 
-        if(w.get()->getPosition().x - W_RADIUS < 0){
-            w.get()->setVelocity(glm::vec2(abs(xVel), yVel));
+        out = w.get()->getPosition().x - W_RADIUS;
+        if(out < 0){
+            vel += glm::vec2(borderForce(abs(out)), 0.f);
         }
-        else if(w.get()->getPosition().x + W_RADIUS > map->width){
-            w.get()->setVelocity(glm::vec2(-abs(xVel), yVel));
+        out = w.get()->getPosition().x + W_RADIUS - map->width;
+        if(out > 0){
+            vel += glm::vec2(-borderForce(abs(out)), 0.f);
         }
-        if(w.get()->getPosition().y - W_RADIUS < 0){
-            w.get()->setVelocity(glm::vec2(xVel, abs(yVel)));
+        out = w.get()->getPosition().y - W_RADIUS;
+        if(out < 0){
+            vel += glm::vec2(0.f, borderForce(abs(out)));
         }
-        else if(w.get()->getPosition().y + W_RADIUS > map->height){
-            w.get()->setVelocity(glm::vec2(xVel, -abs(yVel)));
+
+        out = w.get()->getPosition().y + W_RADIUS - map->height;
+        if(out > 0){
+            vel += glm::vec2(0.f, -borderForce(abs(out)));
         }
+
+        w.get()->setVelocity(w.get()->getVelocity() + vel);
     }
 }
 
