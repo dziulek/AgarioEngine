@@ -15,7 +15,7 @@ protected:
 
     float radius;
     glm::vec2 centerPosition;
-    unsigned int color = WHITE;
+    unsigned int color = BLUE_DE_FRANCE;
 
 public:
 

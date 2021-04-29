@@ -14,22 +14,22 @@ const float WINDOW_WIDTH = 1000;
 const float WINDOW_HEIGHT = 1000;
 
 //colors
-const unsigned int WHITE = 0xffffffff;
-const unsigned int RED = 0xff0000ff;
-const unsigned int GRAY = 0x808080ff;
+const unsigned int BITTERSWEET = 0xfe6f5eff;
+const unsigned int BARN_RED = 0x7c0a02ff;
+const unsigned int BITTER_LIME = 0x648c11ff;
 const unsigned int YELLOW = 0xffff00ff;
 const unsigned int ORANGE = 0xff8000ff;
 const unsigned int PINK = 0xff007fff;
-const unsigned int BLUE = 0x0000ffff;
-const unsigned int GREEN = 0x00ff00ff;
-const unsigned int MAGENTA = 0xff00ffff;
-const unsigned int PURPLE = 0x800080ff;
+const unsigned int BLUE_DE_FRANCE = 0x318ce7ff;
+const unsigned int DARK_TANGERINE = 0xffa812ff;
+const unsigned int DARK_MAGENTA = 0x8b008bff;
+const unsigned int PLUM = 0xdda0ddff;
 const unsigned int MAROON = 0x800000ff;
 
 const unsigned int n_colors = 11;
 
 const unsigned int AGARIO_COLORS[n_colors] = {
-    WHITE, RED, PURPLE, YELLOW, ORANGE, PINK, BLUE, GREEN, MAGENTA, GRAY, MAROON
+    BITTERSWEET, BARN_RED, BITTER_LIME, YELLOW, ORANGE, PINK, BLUE_DE_FRANCE, DARK_TANGERINE, DARK_MAGENTA, PLUM, MAROON
 };
 //physics
 

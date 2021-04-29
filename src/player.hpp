@@ -19,7 +19,7 @@ private:
     float mass;
     float highestScore;
     int highestPosition;
-    uint32_t color = WHITE;
+    uint32_t color = BLUE_DE_FRANCE;
 
 public:
 
