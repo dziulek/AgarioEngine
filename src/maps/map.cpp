@@ -66,7 +66,7 @@ std::pair<std::pair<int, int>, std::pair<int, int>> Map::getMiniRects(glm::vec2 
 void Map::playerObjectAbandoned(PlayerObject * playerObject){
 
     for(auto & blob : *playerObject->getBlobs()){
-        
+        blob.get()->setVelocity(glm::vec2(0.f, 0.f));
         this->abandoned.push_back(std::move(blob));
     }
 

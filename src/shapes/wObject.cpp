@@ -29,7 +29,7 @@ void WObject::move(const float dTime){
 
         float dirx, diry;
 
-        this->acceleration = glm::normalize(-old) * 55.0f * static_cast<float>(pow(2, -glm::length(old) / 30.f));
+        this->acceleration = glm::normalize(-old) * 40.0f * static_cast<float>(pow(1.3, -glm::length(old) / 40.f));
         this->velocity += this->acceleration * dTime;
 
         dirx = old.x * this->velocity.x;
