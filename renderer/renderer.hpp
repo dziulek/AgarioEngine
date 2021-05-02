@@ -1,8 +1,8 @@
 #ifndef RENDERER_HPP
 #define RENDERER_HPP
 
-#include "../agario_engine.hpp"
-#include "../gameObject.hpp"
+#include "../src/agario_engine.hpp"
+#include "../src/gameObject.hpp"
 
 namespace agario{
 

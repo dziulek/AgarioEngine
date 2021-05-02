@@ -1,7 +1,7 @@
 #ifndef SFML_PLAYER_OBJECT_HPP
 #define SFML_PLAYER_OBJECT_HPP
 
-#include "../../playerObject.hpp"
+#include "../src/agario_engine.hpp"
 #include "SFML/Graphics.hpp"
 #include "SFML/Window.hpp"
 #include "SFML/System.hpp"

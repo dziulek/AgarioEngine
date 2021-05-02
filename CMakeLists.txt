@@ -9,10 +9,11 @@ set(CMAKE_CXX_FLAGS_RELEASE_INIT "-Wall")
 include_directories(src)
 
 add_subdirectory(src)
+add_subdirectory(renderer)
 
-add_executable(${BINARY}_run example.cpp)
+add_executable(AgarioEngine_run example.cpp)
 
-target_link_libraries(${BINARY}_run PUBLIC AgarioEngine_lib -lsfml-graphics -lsfml-window -lsfml-system)
+target_link_libraries(AgarioEngine_run PUBLIC AgarioEngine_lib Renderer_lib -lsfml-graphics -lsfml-window -lsfml-system)
 # add_subdirectory(tests)
 # add_subdirectory(lib/glm)
 add_subdirectory(lib/googletest)
