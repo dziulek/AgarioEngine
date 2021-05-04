@@ -189,6 +189,10 @@ void PlayerObject::resetIthElement(int i){
 
 std::pair<glm::vec2, glm::vec2> PlayerObject::getMinRectangle(){
 
+    if(this->blobs.size() == 0){
+        return {glm::vec2(0.f, 0.f), glm::vec2(1.f, 1.f)};
+    }
+
     glm::vec2 left_upper = glm::vec2(PLUS_INFINITY, PLUS_INFINITY);
     glm::vec2 down_right = glm::vec2(MINUS_INFINITY, MINUS_INFINITY);
 

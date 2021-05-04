@@ -6,6 +6,9 @@ using namespace shapes;
 
 void MapCrashController::update(){
 
+    std::vector<int> indexesToDelete;
+    std::vector<int> indToDel_p1;
+    std::vector<int> indToDel_p2;
     //naive version, begin with the simplest algorithm
     for(PlayerObject * p1 : this->getMap()->playerObjects){
 
@@ -32,6 +35,7 @@ void MapCrashController::update(){
                                 p1->deleteIthElement(i1);
                                 i1--;
                                 (*p2)[i2].addMass(m);
+                                break;
                             }
                             else {
 
@@ -48,7 +52,9 @@ void MapCrashController::update(){
     }
 
     //collision with player itself
-    std::vector<int> indexesToDelete;
+    indexesToDelete.clear();
+    indexesToDelete.shrink_to_fit();
+
     for(PlayerObject * p : this->getMap()->playerObjects){
 
         indexesToDelete.clear();
