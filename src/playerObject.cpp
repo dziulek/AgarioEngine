@@ -81,6 +81,7 @@ MoveableCircle & PlayerObject::operator[](int t){
 }
 
 void PlayerObject::setVelocities(){
+    if(blobs.size() == 0) return;
 
     for(auto & b : blobs){
 

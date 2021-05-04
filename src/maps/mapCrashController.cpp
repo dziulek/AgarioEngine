@@ -10,18 +10,19 @@ void MapCrashController::update(){
     std::vector<int> indToDel_p1;
     std::vector<int> indToDel_p2;
     //naive version, begin with the simplest algorithm
-    for(PlayerObject * p1 : this->getMap()->playerObjects){
+    for(int __i = 0; __i < this->getMap()->playerObjects.size() - 1; __i ++){
 
-        for(PlayerObject * p2 : this->getMap()->playerObjects){
+        for(int __j = __i + 1; __j < this->getMap()->playerObjects.size(); __j ++){
             
+            PlayerObject * p1 = this->getMap()->playerObjects[__i];
+            PlayerObject * p2 = this->getMap()->playerObjects[__j];
+
             //collision with player itself is calculated in another loop
             if(p1 == p2)
                 break;
             for(int i1 = 0; i1 < p1->getSize(); i1++){
-
+                bool lost = false;
                 for(int i2 = 0; i2 < p2->getSize(); i2++){
-
-
 
                     float distance = glm::length((*p1)[i1].getPosition() - (*p2)[i2].getPosition());
                     if(distance < std::max((*p1)[i1].getRadius(), (*p2)[i2].getRadius()) && 
@@ -35,6 +36,8 @@ void MapCrashController::update(){
                                 p1->deleteIthElement(i1);
                                 i1--;
                                 (*p2)[i2].addMass(m);
+                                if(p1->getSize() == 0)
+                                    lost = true;
                                 break;
                             }
                             else {
@@ -42,11 +45,15 @@ void MapCrashController::update(){
                                 p2->deleteIthElement(i2);
                                 i2--;
                                 (*p1)[i1].addMass(m);
-                         
+
+                                if(p2->getSize() == 0)
+                                    break;
                             }
                         }
                     }
                 }
+                if(lost == true)
+                    break;
             }
         }
     }
@@ -56,6 +63,8 @@ void MapCrashController::update(){
     indexesToDelete.shrink_to_fit();
 
     for(PlayerObject * p : this->getMap()->playerObjects){
+
+        if(p->getSize() == 0) continue;
 
         indexesToDelete.clear();
         indexesToDelete.shrink_to_fit();
@@ -97,6 +106,8 @@ void MapCrashController::update(){
 
 
     for(PlayerObject * p : this->getMap()->playerObjects){
+        
+        if(p->getSize() == 0) continue;
 
         for(int i = 0; i < p->getSize(); i++){
 

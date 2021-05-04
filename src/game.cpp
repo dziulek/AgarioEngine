@@ -6,19 +6,13 @@ namespace agario{
 using namespace shapes;
 
 void Game::mainLoop(const float dTime){
-    
+
     for(auto & player : players){
 
         player->setVelocities();
     }
-    map->notify();
-    
-    // move other shapes
-    for(auto & shape : this->map->abandoned){
-        if(shape.get() != nullptr){
-            shape.get()->move(dTime);
-        }
-    }
+
+    map->notify();  
 
     // move players
     for(int i = 0; i < players.size(); i++){
@@ -27,6 +21,15 @@ void Game::mainLoop(const float dTime){
         
         else players[i].get()->setState(false);
     }
+
+    // move other shapes
+    for(auto & shape : this->map->abandoned){
+        if(shape.get() != nullptr){
+            shape.get()->move(dTime);
+        }
+    }
+
+
 }
 
 Player * Game::addPlayer(std::string nickname){
