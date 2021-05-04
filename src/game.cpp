@@ -19,14 +19,14 @@ void Game::mainLoop(const float dTime){
             shape.get()->move(dTime);
         }
     }
+
     // move players
     for(int i = 0; i < players.size(); i++){
         if(players[i].get()->getSize() > 0)
             players[i].get()->move(dTime);
+        
+        else players[i].get()->setState(false);
     }
-
-    cullDeadPlayers();
-
 }
 
 Player * Game::addPlayer(std::string nickname){
