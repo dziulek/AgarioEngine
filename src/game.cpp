@@ -25,6 +25,8 @@ void Game::mainLoop(const float dTime){
             players[i].get()->move(dTime);
     }
 
+    cullDeadPlayers();
+
 }
 
 Player * Game::addPlayer(std::string nickname){
